@@ -11,11 +11,12 @@ var topKFrequent = function (nums, k) {
     for (let i = 0; i < len; i++) {
         let num = nums[i]
         if (map.has(num)) {
-            map.get(num)++
+            map.set(num, map.get(num) + 1)
         } else {
             map.set(num, 1)
         }
     }
-    let arr = [...map.entries].sort((a, b) => a[1] - b[1]).slice(0, k).map(item => item[0])
+    // 这里一定要进行降序排列，所以是sort((a, b) => b[1] - a[1])
+    let arr = [...map.entries()].sort((a, b) => b[1] - a[1]).slice(0, k).map(item => item[0])
     return arr;
 };
