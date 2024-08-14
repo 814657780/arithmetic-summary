@@ -37,3 +37,23 @@ var groupAnagrams = function (strs) {
     // 输出最后得到的数组值
     return Array.from(strsMap.values())
 };
+
+/**
+ * @param {string[]} strs
+ * @return {string[][]}
+ */
+var groupAnagrams = function (strs) {
+    // 1、先声明一个Map
+    // 2、先遍历strs数组；
+    // 3、对每个数组的值进行排序，然后放在map中，map中如果包含，则进行push
+    let [map, len] = [new Map(), strs.length]
+    for (let i = 0; i < len; i++) {
+        let str = strs[i].split('').sort().join();
+        if (map.has(str)) {
+            map.get(str).push(strs[i])
+        } else {
+            map.set(str, [strs[i]])
+        }
+    }
+    return Array.from(map.values())
+};
